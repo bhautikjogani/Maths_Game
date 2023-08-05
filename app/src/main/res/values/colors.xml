@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Game Module -->
+    <color name="ad_background">#CC000000</color>
+    <color name="ad_text">#B3FFFFFF</color>
+    <color name="black40">#66000000</color>
+    <color name="black60">#99000000</color>
+    <color name="black70">#B3000000</color>
+    <color name="black80">#CC000000</color>
+    <color name="Checkcolor">#66000000</color>
+    <color name="Checkcolor2">#26000000</color>
+    <color name="Transparent">#00000000</color>
+
+</resources>

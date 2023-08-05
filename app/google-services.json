@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "598925915015",
+    "project_id": "maths-game-d7e0f",
+    "storage_bucket": "maths-game-d7e0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598925915015:android:312d22f413b7d08cf5d922",
+        "android_client_info": {
+          "package_name": "com.globtech.zone.multiplication.table.kids.maths.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598925915015-fsk2cm8cni0c0dc0e3c89vc406u9j54q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTCFC0IZ3bZXFahCF3xoyQbl5I_bJbsCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598925915015-fsk2cm8cni0c0dc0e3c89vc406u9j54q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

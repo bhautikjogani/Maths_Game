@@ -1,0 +1,113 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+apply from: "utils.gradle"
+
+android {
+    namespace 'com.globtech.zone.multiplication.table.kids.maths.game'
+    compileSdk 33
+
+    lintOptions {
+        abortOnError false
+        disable 'CutPasteId'
+        disable 'SetTextI18n'
+        disable 'RecyclerView'
+        disable 'DefaultLocale'
+        disable 'SimpleDateFormat'
+        disable 'DiscouragedApi'
+        disable 'HardcodedText'
+        disable 'ContentDescription'
+        disable 'NotifyDataSetChanged'
+        disable 'ClickableViewAccessibility'
+        disable 'UseCompatLoadingForDrawables'
+        disable 'CustomSplashScreen'
+        disable 'LockedOrientationActivity'
+    }
+
+    defaultConfig {
+//        compileSdkPreview = "UpsideDownCake"
+        applicationId "com.globtech.zone.multiplication.table.kids.maths.game"
+        minSdk 21
+        targetSdk 33
+        compileSdkVersion 33
+        versionCode 2
+        versionName "0.2"
+        multiDexEnabled true
+
+        resValue "string", "ID_AdMobAppID", ID_AdMobAppID
+        resValue "string", "ID_UnityGameID", ID_UnityGameID
+        resValue "string", "ID_LeaderboardAppID", ID_LeaderboardAppID
+        resValue "string", "ID_LeaderboardID", ID_LeaderboardID
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def Date = new Date().format('dd_MM_yyyy')
+            outputFileName = "Maths_game_${variant.name}(${variant.versionName})__" + Date + ".apk"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation 'androidx.core:core-splashscreen:1.0.1'
+
+    //region: Game Module Dependencies
+    implementation 'me.grantland:autofittextview:0.2.1'
+
+    implementation 'com.airbnb.android:lottie:5.2.0'
+    implementation 'com.android.billingclient:billing-ktx:5.1.0'
+
+    implementation platform('com.google.firebase:firebase-bom:31.2.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-config-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+
+    implementation 'com.google.android.gms:play-services-ads:21.5.0'
+    implementation 'com.google.android.gms:play-services-appset:16.0.2'
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+    implementation 'com.google.android.gms:play-services-basement:18.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+    implementation 'com.google.android.gms:play-services-games:23.1.0'
+    implementation 'com.google.android.play:core:1.10.3'
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.5.1"
+    //endregion
+
+}

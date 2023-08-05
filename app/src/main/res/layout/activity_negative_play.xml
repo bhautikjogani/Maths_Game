@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="enableAns"
+            type="boolean" />
+
+        <variable
+            name="totalQue"
+            type="int" />
+
+        <variable
+            name="currentQue"
+            type="int" />
+
+        <variable
+            name="keyType"
+            type="int" />
+
+        <variable
+            name="clickHandler"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="clickHandler2"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <GameModule.CustomView.MyConstrainLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        tools:context="com.globtech.zone.multiplication.table.kids.maths.game.Activities.Playings.NegativePlay">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_main" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:elevation="20dp"
+            app:cardBackgroundColor="#4D000000"
+            app:cardCornerRadius="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/btnHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivHome"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="-8dp"
+                    android:padding="7dp"
+                    android:src="@drawable/click_ic_home" />
+
+                <TextView
+                    android:id="@+id/tvHome"
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="HOME"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="15dp"
+                android:gravity="center"
+                android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivSetting"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="-8dp"
+                    android:padding="7dp"
+                    android:src="@drawable/click_ic_setting" />
+
+                <TextView
+                    android:id="@+id/tvSetting"
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="SETTING"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="ADDITION"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/tvTitle2"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="6dp"
+                android:text="TIME CHALLENGE"
+                android:textSize="12sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+            <LinearLayout
+                android:id="@+id/btnDraw"
+                style="@style/textStyle"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="126dp"
+                android:layout_marginBottom="-5dp"
+                android:background="@drawable/ic_draw_main"
+                android:gravity="center"
+                android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    style="@style/textStyle"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_draw" />
+
+                <TextView
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="DRAW"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frmBoard"
+                android:layout_width="369dp"
+                android:layout_height="227dp"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <ImageView
+                    android:id="@+id/ivBoard"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/board_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvQCounter"
+                    style="@style/textStyle"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_question_counter"
+                    android:gravity="center"
+                    android:paddingBottom="3dp"
+                    android:text='@{currentQue+"/"+totalQue, default="0/0"}'
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivBoard"
+                    app:layout_constraintEnd_toEndOf="@+id/ivBoard"
+                    app:layout_constraintStart_toStartOf="@+id/ivBoard"
+                    app:layout_constraintTop_toTopOf="@+id/ivBoard">
+
+                    <TextView
+                        android:id="@+id/tvQ1"
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="(-10)"
+                        android:textSize="@dimen/quesNegativeTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tvSymbol"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvSymbol"
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textSize="@dimen/quesNegativeTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tvQ2"
+                        app:layout_constraintStart_toEndOf="@id/tvQ1"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvQ2"
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="(-10)"
+                        android:textSize="@dimen/quesNegativeTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tvEqual"
+                        app:layout_constraintStart_toEndOf="@id/tvSymbol"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvEqual"
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text=" = "
+                        android:textSize="@dimen/quesNegativeTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/tvAns"
+                        app:layout_constraintStart_toEndOf="@id/tvQ2"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvAns"
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="100"
+                        android:textSize="@dimen/quesNegativeTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvEqual"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/viewUnderLine"
+                        android:layout_width="0dp"
+                        android:layout_height="5dp"
+                        android:background="@drawable/bg_board_text_underline"
+                        android:scaleX="1.2"
+                        app:layout_constraintEnd_toEndOf="@+id/tvAns"
+                        app:layout_constraintStart_toStartOf="@+id/tvAns"
+                        app:layout_constraintTop_toBottomOf="@+id/tvAns" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:alpha=".7"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/btnKeyType"
+                android:layout_width="80dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="136dp"
+                android:layout_marginTop="-10dp"
+                android:alpha=".8"
+                android:background="@drawable/bg_ans_keyboard"
+                android:gravity="center"
+                android:onClickListener="@{(v)->clickHandler2.onClick(v)}"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:padding="3dp"
+                    android:src="@{keyType == 0 ? @drawable/ic_ans_keypad : @drawable/ic_ans_buttons , default=@drawable/ic_ans_buttons }" />
+
+                <TextView
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginBottom="2dp"
+                    android:text='@{keyType == 0 ? "KEYPAD" : "BUTTONS" , default="BUTTONS"}'
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/frmButtonAns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/frmKeypadAns"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{keyType == 0 ? android.view.View.VISIBLE : android.view.View.GONE, default=gone}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frmBoard">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/btn1"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="1"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                        <TextView
+                            android:id="@+id/btn2"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="2"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                        <TextView
+                            android:id="@+id/btn3"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="3"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/btn4"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="4"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                        <TextView
+                            android:id="@+id/btn5"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="5"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                        <TextView
+                            android:id="@+id/btn6"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="6"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/btn7"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="7"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                        <TextView
+                            android:id="@+id/btn8"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="8"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                        <TextView
+                            android:id="@+id/btn9"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="9"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/btnClear"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="C"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                        <TextView
+                            android:id="@+id/btn0"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                        <TextView
+                            android:id="@+id/btnErase"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansKeypadWidth"
+                            android:layout_height="@dimen/ansKeypadHeight"
+                            android:layout_margin="@dimen/ansKeypadMargin"
+                            android:background="@drawable/bg_btn_ans2"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:paddingBottom="@dimen/ansKeypadPaddingB"
+                            android:scaleX="-1"
+                            android:singleLine="true"
+                            android:text="➜"
+                            android:textSize="@dimen/ansKeypadTextSize" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/frmFullAns"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{keyType == 1 ? android.view.View.VISIBLE : android.view.View.GONE, default=visible}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frmBoard">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/btnAns1"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansTextWidth"
+                            android:layout_height="@dimen/ansTextHeight"
+                            android:layout_margin="@dimen/ansTextMargin"
+                            android:background="@drawable/bg_btn_ans"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:padding="@dimen/ansTextPadding"
+                            android:singleLine="true"
+                            android:text="√4"
+                            android:textSize="@dimen/ansTextSize"
+                            app:minTextSize="@dimen/ansTextMinSize" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/btnAns2"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansTextWidth"
+                            android:layout_height="@dimen/ansTextHeight"
+                            android:layout_margin="@dimen/ansTextMargin"
+                            android:background="@drawable/bg_btn_ans"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:padding="@dimen/ansTextPadding"
+                            android:singleLine="true"
+                            android:text="20245"
+                            android:textSize="@dimen/ansTextSize"
+                            app:minTextSize="@dimen/ansTextMinSize" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/btnAns3"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansTextWidth"
+                            android:layout_height="@dimen/ansTextHeight"
+                            android:layout_margin="@dimen/ansTextMargin"
+                            android:background="@drawable/bg_btn_ans"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:padding="@dimen/ansTextPadding"
+                            android:singleLine="true"
+                            android:text="20245"
+                            android:textSize="@dimen/ansTextSize"
+                            app:minTextSize="@dimen/ansTextMinSize" />
+
+                        <me.grantland.widget.AutofitTextView
+                            android:id="@+id/btnAns4"
+                            style="@style/textStyle"
+                            android:layout_width="@dimen/ansTextWidth"
+                            android:layout_height="@dimen/ansTextHeight"
+                            android:layout_margin="@dimen/ansTextMargin"
+                            android:background="@drawable/bg_btn_ans"
+                            android:enabled="@{enableAns ? true : false, default=false}"
+                            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                            android:padding="@dimen/ansTextPadding"
+                            android:singleLine="true"
+                            android:text="20245"
+                            android:textSize="@dimen/ansTextSize"
+                            app:minTextSize="@dimen/ansTextMinSize" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </GameModule.CustomView.MyConstrainLayout>
+
+</layout>

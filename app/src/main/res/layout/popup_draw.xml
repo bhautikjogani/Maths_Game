@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isDraw"
+            type="boolean" />
+
+        <variable
+            name="clickHandle"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <GameModule.CustomView.MyConstrainLayout
+        android:id="@+id/frmParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frmDialog"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1.6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <GameModule.CustomView.DrawingView
+                android:id="@+id/drawView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/frmBottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_draw2"
+                app:layout_constraintBottom_toBottomOf="@+id/drawView"
+                app:layout_constraintEnd_toEndOf="@id/drawView"
+                app:layout_constraintStart_toStartOf="@id/drawView"
+                app:layout_constraintTop_toTopOf="@id/drawView" />
+
+            <TextView
+                android:id="@+id/btnClose"
+                style="@style/textStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-3dp"
+                android:background="@drawable/bg_btn_close"
+                android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                android:text="X"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btnDrawErase"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_margin="6dp"
+                android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                android:padding="5dp"
+                android:src="@{isDraw ? @drawable/ic_clean:@drawable/ic_draw, default=@drawable/ic_clean}"
+                app:layout_constraintBottom_toBottomOf="@+id/drawView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="#94D6FF" />
+
+            <LinearLayout
+                android:id="@+id/frmBottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/drawView">
+
+                <TextView
+                    android:id="@+id/tvSize"
+                    style="@style/textStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="-10dp"
+                    android:text="SIZE"
+                    android:textSize="16sp" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:value="15.0"
+                    android:valueFrom="5.0"
+                    android:valueTo="80.0"
+                    app:thumbColor="#ffffff"
+                    app:tickColorActive="#8BC34A"
+                    app:trackColor="#80FFFFFF"
+                    app:trackColorActive="#003366"
+                    app:trackHeight="10dp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </GameModule.CustomView.MyConstrainLayout>
+
+</layout>

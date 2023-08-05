@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <GameModule.CustomView.MyConstrainLayout
+        android:id="@+id/frmParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frmDialog"
+            android:layout_width="300dp"
+            android:layout_height="230dp"
+            android:background="@drawable/bg_popup"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <GameModule.CustomView.OutlinedTextView
+                android:id="@+id/tvTitle"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="REMOVE ADS?"
+                android:textColor="#96D0FF"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#2079C1"
+                app:strokeWidth="3dp" />
+
+            <View
+                android:id="@+id/viewUnderLine"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@drawable/bg_underline"
+                app:layout_constraintEnd_toEndOf="@+id/tvTitle"
+                app:layout_constraintStart_toStartOf="@+id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+            <TextView
+                android:id="@+id/btnClose"
+                style="@style/textStyle"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-3dp"
+                android:background="@drawable/bg_btn_close"
+                android:text="X"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewUnderLine">
+
+                <TextView
+                    android:id="@+id/tvMsg"
+                    style="@style/textStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:text="Tried of ads?\nyou can purchase\nremove ads pack forever.\nonly at"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="250dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/btnLeft"
+                        style="@style/textStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_red"
+                        android:text="NO"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/btnRight"
+                        style="@style/textStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_green"
+                        android:text="YES"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </GameModule.CustomView.MyConstrainLayout>
+
+</layout>

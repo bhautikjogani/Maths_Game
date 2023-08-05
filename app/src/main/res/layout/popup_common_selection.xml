@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.util.SparseArray" />
+
+        <import type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="difficulty"
+            type="SparseArray&lt;ObservableBoolean>" />
+
+        <variable
+            name="time"
+            type="int" />
+
+        <variable
+            name="digit"
+            type="SparseArray&lt;ObservableBoolean>" />
+
+        <variable
+            name="type"
+            type="int" />
+
+        <variable
+            name="clickHandle"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="clickHandle2"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <GameModule.CustomView.MyConstrainLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/frmDialog"
+            android:layout_width="330dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_popup"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <GameModule.CustomView.OutlinedTextView
+                    android:id="@+id/outlinedTextView"
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="SELECTION"
+                    android:textColor="#96D0FF"
+                    android:textSize="26sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="#2079C1"
+                    app:strokeWidth="3dp" />
+
+                <View
+                    android:id="@+id/viewUnderLine"
+                    android:layout_width="0dp"
+                    android:layout_height="4dp"
+                    android:background="@drawable/bg_underline"
+                    app:layout_constraintEnd_toEndOf="@+id/outlinedTextView"
+                    app:layout_constraintStart_toStartOf="@+id/outlinedTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/outlinedTextView" />
+
+                <TextView
+                    android:id="@+id/btnClose"
+                    style="@style/textStyle"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginRight="-3dp"
+                    android:background="@drawable/bg_btn_close"
+                    android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                    android:text="X"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/btnStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewUnderLine">
+
+                <LinearLayout
+                    android:id="@+id/frmEMH"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <FrameLayout
+                        android:id="@+id/btnEasy"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_mode_easy"
+                        android:onClickListener="@{(v)->clickHandle2.onClick(v)}">
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="7dp"
+                            android:gravity="center_vertical"
+                            android:text="EASY"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/bg_mode_checked"
+                            android:padding="7dp"
+                            android:src='@{difficulty[0].get() ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/btnMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_mode_medium"
+                        android:onClickListener="@{(v)->clickHandle2.onClick(v)}">
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="7dp"
+                            android:gravity="center_vertical"
+                            android:text="MEDIUM"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/bg_mode_checked"
+                            android:padding="7dp"
+                            android:src='@{difficulty[1].get() ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:id="@+id/btnHard"
+                        android:layout_width="0dp"
+                        android:layout_height="85dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_mode_hard"
+                        android:onClickListener="@{(v)->clickHandle2.onClick(v)}">
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="7dp"
+                            android:gravity="center_vertical"
+                            android:text="HARD"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/bg_mode_checked"
+                            android:padding="7dp"
+                            android:src='@{difficulty[2].get() ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/frmTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_time"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="TIMER"
+                        android:textColor="#2E81B5"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/btnTime10"
+                            style="@style/textStyle"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="8dp"
+                            android:background="@{time == 10 ? @drawable/bg_time_selected : @drawable/bg_time_unselected,default=@drawable/bg_time_selected}"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-5dp"
+                                android:text="10"
+                                android:textSize="35sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:text="SEC"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnTime20"
+                            style="@style/textStyle"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="8dp"
+                            android:background="@{time == 20 ? @drawable/bg_time_selected : @drawable/bg_time_unselected,default=@drawable/bg_time_unselected}"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-5dp"
+                                android:text="20"
+                                android:textSize="35sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:text="SEC"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnTime30"
+                            style="@style/textStyle"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="8dp"
+                            android:background="@{time == 30 ? @drawable/bg_time_selected : @drawable/bg_time_unselected,default=@drawable/bg_time_unselected}"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-5dp"
+                                android:text="30"
+                                android:textSize="35sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:text="SEC"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnTime60"
+                            style="@style/textStyle"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="8dp"
+                            android:background="@{time == 60 ? @drawable/bg_time_selected : @drawable/bg_time_unselected,default=@drawable/bg_time_unselected}"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-5dp"
+                                android:text="60"
+                                android:textSize="35sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:text="SEC"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/frmDigit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/bg_time"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:paddingBottom="3dp"
+                    android:visibility="visible">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="DIGITS"
+                        android:textColor="#2E81B5"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/btnDigit1"
+                            android:layout_width="70dp"
+                            android:layout_height="120dp"
+                            android:layout_margin="3dp"
+                            android:background="@drawable/bg_time_digit"
+                            android:gravity="center"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="1"
+                                android:textSize="34sp" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:gravity="center_vertical"
+                                android:text="DIGIT"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-3dp"
+                                android:layout_marginBottom="8dp"
+                                android:gravity="center_vertical"
+                                android:text="(1+1)"
+                                android:textSize="10sp" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/bg_mode_checked"
+                                android:padding="7dp"
+                                android:src='@{digit[0].get() ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnDigit2"
+                            android:layout_width="70dp"
+                            android:layout_height="120dp"
+                            android:layout_margin="3dp"
+                            android:background="@drawable/bg_time_digit"
+                            android:gravity="center"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="2"
+                                android:textSize="34sp" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:gravity="center_vertical"
+                                android:text="DIGIT"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-3dp"
+                                android:layout_marginBottom="8dp"
+                                android:gravity="center_vertical"
+                                android:text="(12+12)"
+                                android:textSize="10sp" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/bg_mode_checked"
+                                android:padding="7dp"
+                                android:src='@{digit[1].get() ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnDigit3"
+                            android:layout_width="70dp"
+                            android:layout_height="120dp"
+                            android:layout_margin="3dp"
+                            android:background="@drawable/bg_time_digit"
+                            android:gravity="center"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="3"
+                                android:textSize="34sp" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:gravity="center_vertical"
+                                android:text="DIGIT"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-3dp"
+                                android:layout_marginBottom="8dp"
+                                android:gravity="center_vertical"
+                                android:text="(123+123)"
+                                android:textSize="10sp" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/bg_mode_checked"
+                                android:padding="7dp"
+                                android:src='@{digit[2].get() ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnDigit4"
+                            android:layout_width="70dp"
+                            android:layout_height="120dp"
+                            android:layout_margin="3dp"
+                            android:background="@drawable/bg_time_digit"
+                            android:gravity="center"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:text="4"
+                                android:textSize="34sp" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-8dp"
+                                android:gravity="center_vertical"
+                                android:text="DIGIT"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-3dp"
+                                android:layout_marginBottom="8dp"
+                                android:gravity="center_vertical"
+                                android:text="(1234+1234)"
+                                android:textSize="10sp" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/bg_mode_checked"
+                                android:padding="7dp"
+                                android:src='@{digit[3].get() ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/frmType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/bg_time"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="TYPE"
+                        android:textColor="#2E81B5"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/btnAddition"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_time_digit"
+                            android:gravity="center"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_vertical"
+                                android:text="+"
+                                android:textSize="55sp" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="-10dp"
+                                android:background="@drawable/bg_mode_checked"
+                                android:padding="7dp"
+                                android:src='@{type==0 ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnSubtraction"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_time_digit"
+                            android:gravity="center"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_vertical"
+                                android:text="-"
+                                android:textSize="55sp" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="-10dp"
+                                android:background="@drawable/bg_mode_checked"
+                                android:padding="7dp"
+                                android:src='@{type == 1? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnMultiplication"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_time_digit"
+                            android:gravity="center"
+                            android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                            android:orientation="vertical">
+
+                            <TextView
+                                style="@style/textStyle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-20dp"
+                                android:gravity="center_vertical"
+                                android:text="×"
+                                android:textSize="55sp" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginTop="-10dp"
+                                android:background="@drawable/bg_mode_checked"
+                                android:padding="7dp"
+                                android:src='@{type == 2 ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnStart"
+                style="@style/textStyle"
+                android:layout_width="160dp"
+                android:layout_height="45dp"
+                android:background="@drawable/bg_btn_start"
+                android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                android:text="START"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+
+    </GameModule.CustomView.MyConstrainLayout>
+
+</layout>

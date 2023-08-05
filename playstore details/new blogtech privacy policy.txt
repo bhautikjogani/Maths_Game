@@ -1,0 +1,33 @@
+Introduction
+Welcome to GlobTech Zone! This Privacy Policy outlines how we collect, use, and disclose information from users under the age of 13 in compliance with the Children's Online Privacy Protection Act (COPPA) and other relevant laws and regulations.
+
+Information We Collect
+We collect the following types of information from users:
+
+Personal Information: We do not knowingly collect personal information from children under the age of 13 without verifiable parental consent. If we become aware that we have collected personal information from a child without consent, we will take immediate steps to delete that information from our records.
+
+Non-Personal Information: We may collect non-personal information, such as device information (e.g., device type, operating system), in-app activities, and anonymous usage statistics to improve our app and services.
+
+Google Ads
+Our app may use Google Ads to serve personalized advertisements. These ads are tailored based on non-personal information collected from users. We do not use interest-based advertising or behavioral targeting on children under 13.
+
+In-App Purchases
+Our app may offer in-app purchases for additional content or features. In-app purchases are not necessary to use the basic functionalities of the app, and they are not targeted at children under 13.
+
+Parental Consent
+If we determine that personal information will be collected from a child under 13, we will seek verifiable parental consent before proceeding with data collection. Parental consent may be obtained through a method that complies with COPPA guidelines.
+
+Data Retention
+We retain personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy or as required by law. Non-personal information may be retained for statistical and analytical purposes.
+
+Security
+We take reasonable measures to protect the information we collect from unauthorized access, disclosure, alteration, or destruction. However, no method of transmission over the internet or electronic storage is 100% secure.
+
+Third-Party Services
+Our app may contain links to third-party websites or services. We are not responsible for the privacy practices or content of these third parties. We encourage users to review the privacy policies of such third-party services.
+
+Changes to this Policy
+We reserve the right to modify this Privacy Policy at any time. Any changes will be effective immediately upon posting the updated policy within the app. Users will be deemed to have accepted the updated policy by continuing to use the app.
+
+Contact Us
+If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at  globtechiron01@gmail.com.

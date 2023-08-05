@@ -1,0 +1,36 @@
+<resources>
+
+    <string name="app_name">Maths Game</string>
+    <string name="channel_id">MathsGamePZ</string>
+
+    <!-- Game Module -->
+    <string name="NoAdLoaded">ad is not available, please check back later.</string>
+    <string name="NoConnection">please cross check your internet connectivity and try again.</string>
+    <string name="SomethingWrong">Something want wrong</string>
+    <string name="RateUsTitle">&#160;RATE US&#160;</string>
+    <string name="RateUsNow">Rate now</string>
+    <string name="RateUsLater">ask me later</string>
+    <string name="rewardedMsg">Are you sure, You want to watch an ad?</string>
+    <string name="WatchAd">WATCH VIDEO</string>
+    <string name="No">No</string>
+
+    <string name="companyName">GlobTech</string>
+    <string name="txt_game">Games</string>
+<!--    <string name="shareBody">Hey my friend! I\'m inviting you to play this amazing Maths game with endless fun. It has a smooth experience. Try it now.</string>-->
+    <string name="shareBody">📲 Download the app now and let\'s solve mind-bending equations and tricky puzzles together! 🎯🧩.</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="close">close</string>
+    <string name="open">open</string>
+    <string name="RateUsMessage">If you like this game, please take a moment to rate us.Thanks for your support.</string>
+
+</resources>

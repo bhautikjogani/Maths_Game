@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="isMusic"
+            type="boolean" />
+
+        <variable
+            name="isSound"
+            type="boolean" />
+
+        <variable
+            name="isNotification"
+            type="boolean" />
+
+        <variable
+            name="isVibration"
+            type="boolean" />
+
+        <variable
+            name="clickHandle"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="clickHandle2"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <GameModule.CustomView.MyConstrainLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frmDialog"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_popup"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <GameModule.CustomView.OutlinedTextView
+                android:id="@+id/outlinedTextView"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="SETTING"
+                android:textColor="#96D0FF"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#2079C1"
+                app:strokeWidth="3dp" />
+
+            <View
+                android:id="@+id/viewUnderLine"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@drawable/bg_underline"
+                app:layout_constraintEnd_toEndOf="@+id/outlinedTextView"
+                app:layout_constraintStart_toStartOf="@+id/outlinedTextView"
+                app:layout_constraintTop_toBottomOf="@+id/outlinedTextView" />
+
+            <TextView
+                android:id="@+id/btnClose"
+                style="@style/textStyle"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-3dp"
+                android:background="@drawable/bg_btn_close"
+                android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                android:text="X"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/frmEMH"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewUnderLine">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:text="MUSIC"
+                        android:textColor="#003366"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/btnMusic"
+                        android:layout_width="67dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center|right"
+                        android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                        android:src="@{isMusic ? @drawable/ic_switch_on : @drawable/ic_switch_off ,default=@drawable/ic_switch_on}" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:text="SOUND"
+                        android:textColor="#003366"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/btnSound"
+                        android:layout_width="67dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center|right"
+                        android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                        android:src="@{isSound ? @drawable/ic_switch_on : @drawable/ic_switch_off ,default=@drawable/ic_switch_on}" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/frmVibration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:text="VIBRATION"
+                        android:textColor="#003366"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/btnVibration"
+                        android:layout_width="67dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center|right"
+                        android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                        android:src="@{isVibration ? @drawable/ic_switch_on : @drawable/ic_switch_off ,default=@drawable/ic_switch_on}" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/frmNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
+                        android:text="NOTIFICATION"
+                        android:textColor="#003366"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/btnNotification"
+                        android:layout_width="67dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center|right"
+                        android:onClickListener="@{(v)->clickHandle2.onClick(v)}"
+                        android:src="@{isNotification ? @drawable/ic_switch_on : @drawable/ic_switch_off ,default=@drawable/ic_switch_on}" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/btnFeedback"
+                    style="@style/textStyle"
+                    android:layout_width="170dp"
+                    android:layout_height="43dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/bg_table_number"
+                    android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                    android:text="FEEDBACK"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/btnPrivacyPolicy"
+                    style="@style/textStyle"
+                    android:layout_width="230dp"
+                    android:layout_height="43dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_table_number"
+                    android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                    android:text="PRIVACY POLICY"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </GameModule.CustomView.MyConstrainLayout>
+
+</layout>

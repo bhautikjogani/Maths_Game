@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="difficulty"
+            type="int" />
+
+        <variable
+            name="clickHandle"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="clickHandle2"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <GameModule.CustomView.MyConstrainLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frmDialog"
+            android:layout_width="280dp"
+            android:layout_height="290dp"
+            android:background="@drawable/bg_popup"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <GameModule.CustomView.OutlinedTextView
+                android:id="@+id/outlinedTextView"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="TABLE"
+                android:textColor="#96D0FF"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#2079C1"
+                app:strokeWidth="3dp" />
+
+            <View
+                android:id="@+id/viewUnderLine"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@drawable/bg_underline"
+                app:layout_constraintEnd_toEndOf="@+id/outlinedTextView"
+                app:layout_constraintStart_toStartOf="@+id/outlinedTextView"
+                app:layout_constraintTop_toBottomOf="@+id/outlinedTextView" />
+
+            <TextView
+                android:id="@+id/btnClose"
+                style="@style/textStyle"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-3dp"
+                android:background="@drawable/bg_btn_close"
+                android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                android:text="X"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/btnStart"
+                style="@style/textStyle"
+                android:layout_width="160dp"
+                android:layout_height="45dp"
+                android:background="@drawable/bg_btn_start"
+                android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                android:text="START"
+                android:textSize="25sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/frmEMH"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/btnStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewUnderLine">
+
+                <FrameLayout
+                    android:id="@+id/btnSequential"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_mode_easy"
+                    android:onClickListener="@{(v)->clickHandle2.onClick(v)}">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:text="SEQUENTIAL"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="right|center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/bg_mode_checked"
+                        android:padding="7dp"
+                        android:src='@{difficulty == 0 ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/btnRadom"
+                    android:layout_width="220dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/bg_mode_medium"
+                    android:onClickListener="@{(v)->clickHandle2.onClick(v)}">
+
+                    <TextView
+                        style="@style/textStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:text="RANDOM"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="right|center"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/bg_mode_checked"
+                        android:padding="7dp"
+                        android:src='@{difficulty == 1 ? @drawable/ic_checked_right : @drawable/bg_mode_checked }' />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </GameModule.CustomView.MyConstrainLayout>
+
+</layout>

@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickHandler"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <GameModule.CustomView.MyConstrainLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.globtech.zone.multiplication.table.kids.maths.game.Activities.HomeScreen">
+
+        <ImageView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_main" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnRemoveAds"
+            android:layout_width="100dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+            app:layout_constraintEnd_toStartOf="@id/btnReport"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ic_RemoveAds"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/click_ic_remove_ads"
+                app:layout_constraintBottom_toTopOf="@id/tvRemoveAds"
+                app:layout_constraintDimensionRatio="1:.8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvRemoveAds"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REMOVE ADS"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnLanguage"
+            android:layout_width="100dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="25dp"
+            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ic_Language"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/click_ic_statistics"
+                app:layout_constraintBottom_toTopOf="@id/tvLanguage"
+                app:layout_constraintDimensionRatio="1:.8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--            android:src="@drawable/click_ic_language"-->
+
+            <TextView
+                android:id="@+id/tvLanguage"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REPORT"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <!--            android:text="LANGUAGES"-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnSetting"
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:layout_marginBottom="25dp"
+            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnReport"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/ic_Setting"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/click_ic_setting"
+                app:layout_constraintBottom_toTopOf="@id/tvSetting"
+                app:layout_constraintDimensionRatio="1:.8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSetting"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                android:text="SETTING"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnReport"
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSetting"
+            app:layout_constraintEnd_toStartOf="@id/btnRateUS"
+            app:layout_constraintStart_toEndOf="@id/btnSetting"
+            app:layout_constraintTop_toTopOf="@+id/btnSetting">
+
+            <ImageView
+                android:id="@+id/ic_Report"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/click_ic_statistics"
+                app:layout_constraintBottom_toTopOf="@id/tvReport"
+                app:layout_constraintDimensionRatio="1:.8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvReport"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REPORT"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnRateUS"
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSetting"
+            app:layout_constraintEnd_toStartOf="@id/btnShare"
+            app:layout_constraintStart_toEndOf="@id/btnReport"
+            app:layout_constraintTop_toTopOf="@+id/btnSetting">
+
+            <ImageView
+                android:id="@+id/ic_rateUs"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/click_ic_rate_us"
+                app:layout_constraintBottom_toTopOf="@id/tvRateUs"
+                app:layout_constraintDimensionRatio="1:.8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvRateUs"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RATE US"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btnShare"
+            android:layout_width="80dp"
+            android:layout_height="65dp"
+            android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSetting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnRateUS"
+            app:layout_constraintTop_toTopOf="@+id/btnSetting">
+
+            <ImageView
+                android:id="@+id/ic_Share"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/click_ic_share"
+                app:layout_constraintBottom_toTopOf="@id/tvShare"
+                app:layout_constraintDimensionRatio="1:.8"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvShare"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SHARE"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="35dp"
+            android:paddingBottom="35dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSetting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRemoveAds">
+
+            <ImageView
+                android:layout_width="340dp"
+                android:layout_height="0dp"
+                android:layout_margin="15dp"
+                android:layout_weight="1"
+                android:src="@drawable/app_icon"
+                app:layout_constraintBottom_toTopOf="@+id/btnAddition"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnAddition"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                    android:shadowColor="#000000"
+                    android:shadowDy="15"
+                    android:shadowRadius="20"
+                    android:theme="@style/ThemeOverlay.MaterialComponents"
+                    app:cardBackgroundColor="#ffffff"
+                    app:circularflow_radiusInDP="200"
+                    app:layout_constraintBottom_toTopOf="@+id/btnMultiplication"
+                    app:layout_constraintEnd_toStartOf="@id/btnSubtraction"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnMixedOperations">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:scaleX=".65"
+                            android:scaleY=".65"
+                            android:src="@drawable/ic_hm_plus" />
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:text="ADDITION"
+                            android:textColor="#4F7740"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnSubtraction"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                    android:shadowColor="#000000"
+                    android:shadowDy="15"
+                    android:shadowRadius="20"
+                    android:theme="@style/ThemeOverlay.MaterialComponents"
+                    app:cardBackgroundColor="#ffffff"
+                    app:circularflow_radiusInDP="200"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnAddition"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnAddition"
+                    app:layout_constraintTop_toTopOf="@+id/btnAddition">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:scaleX=".9"
+                            android:scaleY=".9"
+                            android:src="@drawable/ic_hm_subtraction" />
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:text="SUBTRACTION"
+                            android:textColor="#681D16"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnMultiplication"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                    android:shadowColor="#000000"
+                    android:shadowDy="15"
+                    android:shadowRadius="20"
+                    android:theme="@style/ThemeOverlay.MaterialComponents"
+                    app:cardBackgroundColor="#ffffff"
+                    app:circularflow_radiusInDP="200"
+                    app:layout_constraintBottom_toTopOf="@+id/btnSquareRoot"
+                    app:layout_constraintEnd_toStartOf="@id/btnSubtraction"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnAddition">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:scaleX=".65"
+                            android:scaleY=".65"
+                            android:src="@drawable/ic_hm_multiplication" />
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:text="MULTIPLICATION"
+                            android:textColor="#713D11"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnDivision"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                    android:shadowColor="#000000"
+                    android:shadowDy="15"
+                    android:shadowRadius="20"
+                    android:theme="@style/ThemeOverlay.MaterialComponents"
+                    app:cardBackgroundColor="#ffffff"
+                    app:circularflow_radiusInDP="200"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnMultiplication"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnMultiplication"
+                    app:layout_constraintTop_toTopOf="@+id/btnMultiplication">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:scaleX=".8"
+                            android:scaleY=".8"
+                            android:src="@drawable/ic_hm_division" />
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:text="DIVISION"
+                            android:textColor="#01528A"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnSquareRoot"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                    android:shadowColor="#000000"
+                    android:shadowDy="15"
+                    android:shadowRadius="20"
+                    android:theme="@style/ThemeOverlay.MaterialComponents"
+                    app:cardBackgroundColor="#ffffff"
+                    app:circularflow_radiusInDP="200"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btnSubtraction"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnMultiplication">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:scaleX=".9"
+                            android:scaleY=".9"
+                            android:src="@drawable/ic_hm_square_root" />
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:text="SQUARE ROOT"
+                            android:textColor="#2D5335"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnDecimal"
+                    android:layout_width="160dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"
+                    android:onClickListener="@{(v)->clickHandler.onClick(v)}"
+                    android:shadowColor="#000000"
+                    android:shadowDy="15"
+                    android:shadowRadius="20"
+                    android:theme="@style/ThemeOverlay.MaterialComponents"
+                    app:cardBackgroundColor="#ffffff"
+                    app:circularflow_radiusInDP="200"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnSquareRoot"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnSquareRoot"
+                    app:layout_constraintTop_toTopOf="@+id/btnSquareRoot">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:scaleX=".75"
+                            android:scaleY=".75"
+                            android:src="@drawable/ic_hm_decimal" />
+
+                        <TextView
+                            style="@style/textStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|bottom"
+                            android:layout_marginBottom="10dp"
+                            android:text="DECIMAL"
+                            android:textColor="#261A39"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </GameModule.CustomView.MyConstrainLayout>
+
+</layout>

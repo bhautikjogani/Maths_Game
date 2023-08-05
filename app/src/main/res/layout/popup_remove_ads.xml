@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="clickHandle"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <GameModule.CustomView.MyConstrainLayout
+        android:id="@+id/frmParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frmDialog"
+            android:layout_width="310dp"
+            android:layout_height="230dp"
+            android:background="@drawable/bg_popup"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <GameModule.CustomView.OutlinedTextView
+                android:id="@+id/outlinedTextView"
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="TRIED OF ADS?"
+                android:textColor="#96D0FF"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#2079C1"
+                app:strokeWidth="3dp" />
+
+            <View
+                android:id="@+id/viewUnderLine"
+                android:layout_width="0dp"
+                android:layout_height="4dp"
+                android:background="@drawable/bg_underline"
+                app:layout_constraintEnd_toEndOf="@+id/outlinedTextView"
+                app:layout_constraintStart_toStartOf="@+id/outlinedTextView"
+                app:layout_constraintTop_toBottomOf="@+id/outlinedTextView" />
+
+            <TextView
+                android:id="@+id/btnClose"
+                style="@style/textStyle"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-3dp"
+                android:background="@drawable/bg_btn_close"
+                android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                android:text="X"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewUnderLine">
+
+                <TextView
+                    style="@style/textStyle"
+                    android:textSize="16sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You can purchase\nremove ads pack forever.\nonly at"
+                    android:textColor="#000000" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="180dp"
+                    android:layout_height="43dp"
+                    android:layout_marginTop="25dp">
+
+                    <TextView
+                        android:id="@+id/btnPurchase"
+                        style="@style/textStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/btn_green"
+                        android:onClickListener="@{(v)->clickHandle.onClick(v)}"
+                        android:textSize="26sp" />
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        style="@style/MaterialAlertDialog.Material3"
+                        android:id="@+id/progressbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        app:indicatorColor="#0A880E"
+                        android:scaleY=".75"
+                        android:scaleX=".75"
+                        app:trackThickness="6dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:trackColor="#9BF19E"
+                        app:trackCornerRadius="35dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </GameModule.CustomView.MyConstrainLayout>
+
+</layout>

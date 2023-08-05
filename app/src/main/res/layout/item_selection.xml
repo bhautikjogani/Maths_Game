@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameModule.CustomView.MyConstrainLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvText"
+        style="@style/textStyle"
+        android:layout_width="320dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/item_bg_selection"
+        android:gravity="center"
+        android:text="1 DIGIT + 1 DIGIT"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</GameModule.CustomView.MyConstrainLayout>
