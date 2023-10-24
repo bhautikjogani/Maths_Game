@@ -3,6 +3,7 @@ package GameModule.AdsUtiles
 import GameModule.GamePreference
 import GameModule.GameSound
 import GameModule.PrefKey
+import GameModule.ScreenUtil
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
@@ -11,13 +12,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.globtech.zone.multiplication.table.kids.maths.game.MyGame
+import com.globtech.zone.multiplication.table.kids.maths.game.MyGame.Companion.MainTAG
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.appopen.AppOpenAd
-import com.globtech.zone.multiplication.table.kids.maths.game.MyGame
-import com.globtech.zone.multiplication.table.kids.maths.game.MyGame.Companion.MainTAG
 import java.util.*
 
 class AppOpenManager(var myGame: MyGame) : Application.ActivityLifecycleCallbacks,
@@ -29,13 +30,19 @@ class AppOpenManager(var myGame: MyGame) : Application.ActivityLifecycleCallback
     private var loadTime: Long = 0
     private var isAdLoading = false
 
+    companion object {
+        var instance: AppOpenManager? = null
+    }
+
     init {
+        instance = null
+        instance = this
         myGame.registerActivityLifecycleCallbacks(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         loadAppOpenAd()
     }
 
-    private fun loadAppOpenAd() {
+    fun loadAppOpenAd() {
         if (GamePreference.getBoolean(PrefKey.isRemoveAds)) return
         if (GamePreference.getAdMobAppOpenAdID().isEmpty()) return
         if (isAdLoading) return
@@ -166,6 +173,17 @@ class AppOpenManager(var myGame: MyGame) : Application.ActivityLifecycleCallback
                 .contains("splash")
         ) return
         showAdIfAvailable()
+    }
+
+    fun destroy() {
+        try {
+            instance = null
+            myGame.unregisterActivityLifecycleCallbacks(this)
+            ProcessLifecycleOwner.get().lifecycle.removeObserver(this)
+            mAppOpenAd = null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }

@@ -8,4 +8,6 @@ abstract class BannerAdListener {
 
     open fun onBannerAdError() {}
 
+    open fun onBannerAdNotShowing() {}
+
 }

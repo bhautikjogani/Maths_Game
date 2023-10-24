@@ -1,5 +1,7 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Activities
 
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
 import GameModule.Base.BaseActivity
 import android.content.Intent
 import android.os.Bundle
@@ -183,7 +185,50 @@ class SelectionActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    fun showVariation(variationType: VariationType) {
+
+    private fun isShowAds(variationType: VariationType): Boolean {
+        return when (gameType) {
+            GameType.Division -> {
+                when (variationType) {
+                    VariationType.TimeChallenge -> false
+                    VariationType.MissingNumber -> false
+                    else -> true
+                }
+            }
+
+            GameType.SquareRoot -> false
+
+            GameType.Decimal -> false
+
+            else -> {
+
+                when (variationType) {
+                    VariationType.Negative -> true
+                    VariationType.TableLearn -> true
+                    VariationType.TablePractice -> false
+                    VariationType.TimeChallenge -> false
+                    VariationType.MissingNumber -> false
+                    else -> true
+                }
+
+            }
+
+        }
+    }
+
+    fun showVariation(variationType: VariationType, isShowAd: Boolean = isShowAds(variationType)) {
+
+        if (isShowAd) {
+            AdsManager.show()?.InterstitialAdIntervaled(
+                activity = this@SelectionActivity,
+                adsListener = object : AdsListener() {
+                    override fun onAdClose() {
+                        super.onAdClose()
+                        showVariation(variationType, false)
+                    }
+                })
+            return
+        }
 
         when (gameType) {
 //            GameType.MixedOperations -> {}
@@ -304,6 +349,5 @@ class SelectionActivity : BaseActivity(), View.OnClickListener {
         }
 
     }
-
 
 }

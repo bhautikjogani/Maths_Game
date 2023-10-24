@@ -1,5 +1,7 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Activities
 
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
 import GameModule.Base.BaseActivity
 import GameModule.GamePreference
 import GameModule.GameSound
@@ -94,8 +96,20 @@ class ReportActivity : BaseActivity(), View.OnClickListener {
 
     }
 
+    private fun doOnFinish() {
+        AdsManager.show()?.InterstitialAdIntervaled(
+            activity = this@ReportActivity,
+            adsListener = object : AdsListener() {
+                override fun onAdClose() {
+                    super.onAdClose()
+                    finish()
+                }
+            }
+        )
+    }
+
     override fun onBackPressed() {
-        finish()
+        doOnFinish()
     }
 
     override fun onClick(view: View) {
@@ -103,7 +117,7 @@ class ReportActivity : BaseActivity(), View.OnClickListener {
 
         when (view) {
             binding.btnHome -> {
-                finish()
+                doOnFinish()
             }
         }
 

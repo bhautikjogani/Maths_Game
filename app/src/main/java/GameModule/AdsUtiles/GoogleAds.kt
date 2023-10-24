@@ -266,10 +266,11 @@ class GoogleAds(var activity: Activity) {
     }
     //endregion
 
+
     //region: BannerAd
     fun showBannerAd(activity: Activity, parent: ViewGroup, bannerAdListener: BannerAdListener) {
         if (GamePreference.getAdMobBannerAdID().isEmpty()) {
-            bannerAdListener.onBannerAdError()
+            bannerAdListener.onBannerAdNotShowing()
             return
         }
         val adview = AdView(activity)

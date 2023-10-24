@@ -1,5 +1,7 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Activities.Playings
 
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
 import GameModule.Base.BaseActivity
 import android.os.Bundle
 import android.view.View
@@ -39,7 +41,21 @@ class TableLeaning : BaseActivity(), View.OnClickListener {
     override fun onClick(view: View?) {
         if (isDoubleClick()) return
         when (view) {
-            binding.btnHome -> finish()
+            binding.btnHome -> {
+
+                AdsManager.show()?.InterstitialAd(
+                    activity = this@TableLeaning,
+                    adsListener = object : AdsListener() {
+                        override fun onAdClose() {
+                            super.onAdClose()
+
+                            finish()
+
+                        }
+                    }
+                )
+
+            }
         }
     }
 

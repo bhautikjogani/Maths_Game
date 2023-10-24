@@ -19,6 +19,7 @@
 
     <GameModule.CustomView.MyConstrainLayout
         android:layout_width="match_parent"
+        android:id="@+id/frmParent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout

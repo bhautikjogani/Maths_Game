@@ -143,7 +143,7 @@
             android:clipToPadding="false"
             android:gravity="center"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/frmAdView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView">
@@ -695,6 +695,40 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/frmAdView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                style="@style/textSpace05"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:background="#4DFFFFFF"
+                android:gravity="center"
+                android:text="Ad Space"
+                android:textColor="#CCCCCC"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/adParent"
+                app:layout_constraintEnd_toEndOf="@+id/adParent"
+                app:layout_constraintStart_toStartOf="@id/adParent"
+                app:layout_constraintTop_toTopOf="@+id/adParent" />
+
+            <FrameLayout
+                android:id="@+id/adParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="55dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </GameModule.CustomView.MyConstrainLayout>
 

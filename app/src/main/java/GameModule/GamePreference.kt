@@ -216,4 +216,16 @@ object GamePreference {
 
     //endregion
 
+
+    //OneSignal
+    fun getOneSignalId(): String {
+        return getString("oneSignalId")
+    }
+
+    fun setOneSignalId(id: String): Boolean {
+        val returnVal = getOneSignalId() == id
+        editor.putString("oneSignalId", id).commit()
+        return returnVal
+    }
+
 }

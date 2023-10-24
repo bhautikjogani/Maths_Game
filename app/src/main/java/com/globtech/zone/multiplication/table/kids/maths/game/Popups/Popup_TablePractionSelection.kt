@@ -1,5 +1,7 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Popups
 
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
 import GameModule.Base.BaseDialog
 import GameModule.GameSound
 import android.app.Activity
@@ -41,15 +43,24 @@ class Popup_TablePractionSelection(
         when (view) {
             binding.btnClose -> dismiss()
             binding.btnStart -> {
-                dismiss()
-                activity.startActivity(
-                    Intent(activity, DigitPlay::class.java)
-                        .putExtra("gameType", GameType.Multiplication)
-                        .putExtra("variationType", variationType)
-                        .putExtra("isSequential", binding.difficulty == 0)
-                        .putExtra("digits", arrayListOf(intArrayOf(1, 30)))
+                AdsManager.show()?.InterstitialAdIntervaled(
+                    activity = activity,
+                    parent = binding.frmParent,
+                    adsListener = object : AdsListener() {
+                        override fun onAdClose() {
+                            super.onAdClose()
+                            dismiss()
+                            activity.startActivity(
+                                Intent(activity, DigitPlay::class.java)
+                                    .putExtra("gameType", GameType.Multiplication)
+                                    .putExtra("variationType", variationType)
+                                    .putExtra("isSequential", binding.difficulty == 0)
+                                    .putExtra("digits", arrayListOf(intArrayOf(1, 30)))
+                            )
+                            activity.finish()
+                        }
+                    }
                 )
-                activity.finish()
             }
         }
 

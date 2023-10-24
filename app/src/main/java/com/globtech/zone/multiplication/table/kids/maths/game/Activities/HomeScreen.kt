@@ -1,5 +1,7 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Activities
 
+import GameModule.AdsUtiles.AdsManager
+import GameModule.AdsUtiles.AppOpenManager
 import GameModule.Base.BaseActivity
 import GameModule.GamePreference
 import GameModule.GameSound
@@ -21,12 +23,17 @@ import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.globtech.zone.multiplication.table.kids.maths.game.BuildConfig
 import com.globtech.zone.multiplication.table.kids.maths.game.Popups.Popup_Conformation
 import com.globtech.zone.multiplication.table.kids.maths.game.Popups.Popup_RemoveAds
 import com.globtech.zone.multiplication.table.kids.maths.game.Popups.Popup_Setting
 import com.globtech.zone.multiplication.table.kids.maths.game.R
 import com.globtech.zone.multiplication.table.kids.maths.game.Utility.GameType
 import com.globtech.zone.multiplication.table.kids.maths.game.databinding.ActivityHomeScreenBinding
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import java.util.Calendar
 
 class HomeScreen : BaseActivity(), View.OnClickListener {
@@ -47,13 +54,15 @@ class HomeScreen : BaseActivity(), View.OnClickListener {
             }
         }
 
+        AdsManager().initialize(this@HomeScreen)
+        setEnableAdsConfig()
         setNotification()
         Utils.showAskForRating(this@HomeScreen, resources.getString(R.string.RateUsMessage))
         GameSound().initialize(
             activity = this,
             clickSound = R.raw.click,
-            backgroundMusics = arrayListOf(),
-            soundList = arrayListOf(),
+            backgroundMusics = arrayListOf(R.raw.bg),
+            soundList = arrayListOf(R.raw.wrong_ans, R.raw.right_ans, R.raw.timer),
             tapSoundsList = arrayListOf()
         )
 
@@ -61,6 +70,63 @@ class HomeScreen : BaseActivity(), View.OnClickListener {
 
         binding.clickHandler = this
 
+    }
+
+    private fun setEnableAdsConfig() {
+
+        if (BuildConfig.DEBUG) {
+            GamePreference.setAdMobAppOpenAdID("")
+            GamePreference.setAdMobBannerAdID("")
+            GamePreference.setAdMobInterstitialAdID("")
+            GamePreference.setAdMobRewardedAdID("")
+            GamePreference.setAdMobRewardedIntAdID("")
+            GamePreference.setIntInterval(1)
+            GamePreference.setShowUnityInt(false)
+            GamePreference.setShowUnityRewarded(false)
+
+            GamePreference.setAdMobAppOpenAdID("ca-app-pub-3940256099942544/3419835294")
+            GamePreference.setAdMobBannerAdID("ca-app-pub-3940256099942544/6300978111")
+            GamePreference.setAdMobInterstitialAdID("ca-app-pub-3940256099942544/1033173712")
+            GamePreference.setAdMobRewardedAdID("ca-app-pub-3940256099942544/5224354917")
+            GamePreference.setAdMobRewardedIntAdID("ca-app-pub-3940256099942544/5354046379")
+//            GamePreference.setIntInterval(1)
+
+            AdsManager.show()?.loadAds()
+            return
+        }
+
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 0
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.fetchAndActivate().addOnCompleteListener(this) { task ->
+            Log.d(TAG, "setEnableAdsConfig:    isSuccessful   --->   ${task.isSuccessful}")
+            if (task.isSuccessful) {
+
+                if (GamePreference.setAdMobAppOpenAdID(remoteConfig.getString("admob_AppOpen")))
+                    AppOpenManager.instance?.loadAppOpenAd()
+
+                var isChanges = false
+
+                if (GamePreference.setAdMobBannerAdID(remoteConfig.getString("admob_Banner")))
+                    isChanges = true
+                if (GamePreference.setAdMobInterstitialAdID(remoteConfig.getString("admob_Int")))
+                    isChanges = true
+                if (GamePreference.setAdMobRewardedAdID(remoteConfig.getString("admob_Rewarded")))
+                    isChanges = true
+                if (GamePreference.setAdMobRewardedIntAdID(remoteConfig.getString("admob_RewardInt")))
+                    isChanges = true
+                if (GamePreference.setIntInterval(remoteConfig.getLong("int_interval").toInt()))
+                    isChanges = true
+
+                /* OneSignal */
+                GamePreference.setOneSignalId(remoteConfig.getString("oneSignalId"))
+
+                if (isChanges) AdsManager.show()?.loadAds()
+
+            }
+        }
     }
 
     private fun setFirebasePushNotification() {
@@ -205,6 +271,9 @@ class HomeScreen : BaseActivity(), View.OnClickListener {
             .setDialogTitle("ALERT")
             .setDialogMsg("ARE YOU SURE?\nYOU WANT TO EXIT?")
             .setButtonLeft("EXIT") {
+                GameSound.play()?.destroy()
+                AdsManager.show()?.destroy()
+                AppOpenManager.instance?.destroy()
                 finishAffinity()
             }
             .setButtonRight("KEEP")

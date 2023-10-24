@@ -1,5 +1,9 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Activities.Playings
 
+import AdsUtiles.BannerAdModel
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
+import GameModule.AdsUtiles.BannerAdListener
 import GameModule.Base.BaseActivity
 import GameModule.GamePreference
 import GameModule.GameSound
@@ -44,6 +48,8 @@ class SquareRootPlay : BaseActivity(), View.OnClickListener {
     val handler = GameHandlerClass()
     var retryQuestionList = MutableListLiveData<QuestionModel>()
 
+    private var bannerAdModel: BannerAdModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (checkAppWasKilled()) return
@@ -59,6 +65,24 @@ class SquareRootPlay : BaseActivity(), View.OnClickListener {
         setBindingData()
         generateQuestionAndAnswer()
 
+        AdsManager.show()?.BannerAd(this, binding.adParent, object : BannerAdListener() {
+            override fun onBannerAdNotShowing() {
+                super.onBannerAdNotShowing()
+                binding.frmAdView.visibility = View.GONE
+            }
+
+            override fun onBannerAdLoaded(bannerAdModel: BannerAdModel) {
+                super.onBannerAdLoaded(bannerAdModel)
+                this@SquareRootPlay.bannerAdModel = bannerAdModel
+                if (!hasWindowFocus()) this@SquareRootPlay.bannerAdModel?.onPause()
+            }
+        })
+
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) bannerAdModel?.onResume() else bannerAdModel?.onPause()
     }
 
     private fun setBindingData() {
@@ -108,12 +132,17 @@ class SquareRootPlay : BaseActivity(), View.OnClickListener {
 
         binding.tvTime.text = time.toString()
         binding.progressbar.max = 1000
+        var isTimerSoundStarted = false
         progressAnim = ObjectAnimator.ofInt(binding.progressbar, "progress", 1000, 67).apply {
             this.duration = (1000 * time).toLong()
             this.interpolator = LinearInterpolator()
             this.addUpdateListener {
                 binding.tvTime.text =
                     (((it.animatedValue as Int) / 10) / (100f / time.toFloat())).toInt().toString()
+                if (binding.tvTime.text.toString() == "4" && !isTimerSoundStarted) {
+                    isTimerSoundStarted = true
+                    GameSound.play()?.sound(R.raw.timer)
+                }
             }
             this.addListener(onEnd = {
                 showToast("oops! time over")
@@ -127,6 +156,7 @@ class SquareRootPlay : BaseActivity(), View.OnClickListener {
                 binding.lottieView.scaleY = 1.3f
                 binding.lottieView.addAnimatorListener(object : Animator.AnimatorListener {
                     override fun onAnimationStart(p0: Animator) {
+                        GameSound.play()?.sound(R.raw.wrong_ans, volume = .6f)
                     }
 
                     override fun onAnimationEnd(p0: Animator) {
@@ -205,15 +235,26 @@ class SquareRootPlay : BaseActivity(), View.OnClickListener {
             Math.min(preTime, avgTime.toLong())
         )
 
-        Popup_Result(
+        AdsManager.show()?.InterstitialAd(
             activity = this@SquareRootPlay,
-            rightAnswer = rightAnswer,
-            wrongAnswer = wrongAnswer,
-            avgTime = avgTime,
-            retryCallback = {
-                doOnRetry()
+            adsListener = object : AdsListener() {
+                override fun onAdClose() {
+                    super.onAdClose()
+
+                    Popup_Result(
+                        activity = this@SquareRootPlay,
+                        rightAnswer = rightAnswer,
+                        wrongAnswer = wrongAnswer,
+                        avgTime = avgTime,
+                        retryCallback = {
+                            doOnRetry()
+                        }
+                    )
+
+                }
             }
         )
+
     }
 
     private fun doOnRetry() {
@@ -372,6 +413,8 @@ class SquareRootPlay : BaseActivity(), View.OnClickListener {
         binding.lottieView.setAnimation(if (isRightAnd) R.raw.right_tick else R.raw.wrong_tick)
         binding.lottieView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
+                GameSound.play()
+                    ?.sound(if (isRightAnd) R.raw.right_ans else R.raw.wrong_ans, volume = .6f)
             }
 
             override fun onAnimationEnd(animation: Animator) {
@@ -422,7 +465,19 @@ class SquareRootPlay : BaseActivity(), View.OnClickListener {
                     .setButtonRight("NO")
                     .setButtonLeft("YES") {
                         resetQuestion()
-                        finish()
+
+                        AdsManager.show()?.InterstitialAd(
+                            activity = this@SquareRootPlay,
+                            adsListener = object : AdsListener() {
+                                override fun onAdClose() {
+                                    super.onAdClose()
+
+                                    finish()
+
+                                }
+                            }
+                        )
+
                     }.setOnDismissListener {
                         colorAnim?.resume()
                         progressAnim?.resume()

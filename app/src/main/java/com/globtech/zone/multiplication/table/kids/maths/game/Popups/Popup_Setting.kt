@@ -35,7 +35,7 @@ class Popup_Setting(
                     binding.isMusic = binding.isMusic.not()
                     GamePreference.setBoolean(PrefKey.isMusic, binding.isMusic)
                     if (binding.isMusic) GameSound.play()?.startMusic()
-                    else GameSound.play()?.stopMusic()
+                    else GameSound.play()?.pauseMusic()
                 }
 
                 binding.btnSound -> {

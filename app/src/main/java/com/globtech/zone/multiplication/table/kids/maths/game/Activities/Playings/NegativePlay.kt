@@ -1,7 +1,12 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Activities.Playings
 
+import AdsUtiles.BannerAdModel
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
+import GameModule.AdsUtiles.BannerAdListener
 import GameModule.Base.BaseActivity
 import GameModule.GamePreference
+import GameModule.GameSound
 import GameModule.HandlerUtils.GameHandlerClass
 import GameModule.Models.MutableListLiveData
 import GameModule.PrefKey
@@ -33,6 +38,8 @@ class NegativePlay : BaseActivity(), View.OnClickListener {
     val handler = GameHandlerClass()
     var retryQuestionList = MutableListLiveData<QuestionModel>()
 
+    private var bannerAdModel: BannerAdModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (checkAppWasKilled()) return
@@ -45,6 +52,24 @@ class NegativePlay : BaseActivity(), View.OnClickListener {
         setBindingData()
         generateQuestionAndAnswer()
 
+        AdsManager.show()?.BannerAd(this, binding.adParent, object : BannerAdListener() {
+            override fun onBannerAdNotShowing() {
+                super.onBannerAdNotShowing()
+                binding.frmAdView.visibility = View.GONE
+            }
+
+            override fun onBannerAdLoaded(bannerAdModel: BannerAdModel) {
+                super.onBannerAdLoaded(bannerAdModel)
+                this@NegativePlay.bannerAdModel = bannerAdModel
+                if (!hasWindowFocus()) this@NegativePlay.bannerAdModel?.onPause()
+            }
+        })
+
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) bannerAdModel?.onResume() else bannerAdModel?.onPause()
     }
 
     private fun generateQuestionAndAnswer() {
@@ -85,15 +110,26 @@ class NegativePlay : BaseActivity(), View.OnClickListener {
         GamePreference.addLong(PrefKey.WrongAns + dyKey, wrongAnswer.toLong())
 //        if (avgTime != 0) GamePreference.addLong(PrefKey.BestTime + dyKey, Math.min(preTime, avgTime.toLong()))
 
-        Popup_Result(
+        AdsManager.show()?.InterstitialAd(
             activity = this@NegativePlay,
-            rightAnswer = rightAnswer,
-            wrongAnswer = wrongAnswer,
-            avgTime = 0,
-            retryCallback = {
-                doOnRetry()
+            adsListener = object : AdsListener() {
+                override fun onAdClose() {
+                    super.onAdClose()
+
+                    Popup_Result(
+                        activity = this@NegativePlay,
+                        rightAnswer = rightAnswer,
+                        wrongAnswer = wrongAnswer,
+                        avgTime = 0,
+                        retryCallback = {
+                            doOnRetry()
+                        }
+                    )
+
+                }
             }
         )
+
     }
 
     private fun doOnRetry() {
@@ -399,7 +435,19 @@ class NegativePlay : BaseActivity(), View.OnClickListener {
                     .setButtonRight("NO")
                     .setButtonLeft("YES") {
                         resetQuestion()
-                        finish()
+
+                        AdsManager.show()?.InterstitialAd(
+                            activity = this@NegativePlay,
+                            adsListener = object : AdsListener() {
+                                override fun onAdClose() {
+                                    super.onAdClose()
+
+                                    finish()
+
+                                }
+                            }
+                        )
+
                     }
             }
 
@@ -437,6 +485,8 @@ class NegativePlay : BaseActivity(), View.OnClickListener {
         binding.lottieView.setAnimation(if (isRightAnd) R.raw.right_tick else R.raw.wrong_tick)
         binding.lottieView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
+                GameSound.play()
+                    ?.sound(if (isRightAnd) R.raw.right_ans else R.raw.wrong_ans, volume = .6f)
             }
 
             override fun onAnimationEnd(animation: Animator) {

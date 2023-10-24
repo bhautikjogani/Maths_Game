@@ -1,7 +1,12 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Activities.Playings
 
+import AdsUtiles.BannerAdModel
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
+import GameModule.AdsUtiles.BannerAdListener
 import GameModule.Base.BaseActivity
 import GameModule.GamePreference
+import GameModule.GameSound
 import GameModule.HandlerUtils.GameHandlerClass
 import GameModule.Models.MutableListLiveData
 import GameModule.PrefKey
@@ -44,6 +49,8 @@ class MissingNumberPlay : BaseActivity(), View.OnClickListener {
     var retryQuestionList = MutableListLiveData<QuestionModel>()
     val handler = GameHandlerClass()
 
+    private var bannerAdModel: BannerAdModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (checkAppWasKilled()) return
@@ -57,6 +64,24 @@ class MissingNumberPlay : BaseActivity(), View.OnClickListener {
         setBindingData()
         generateQuestionAndAnswer()
 
+        AdsManager.show()?.BannerAd(this, binding.adParent, object : BannerAdListener() {
+            override fun onBannerAdNotShowing() {
+                super.onBannerAdNotShowing()
+                binding.frmAdView.visibility = View.GONE
+            }
+
+            override fun onBannerAdLoaded(bannerAdModel: BannerAdModel) {
+                super.onBannerAdLoaded(bannerAdModel)
+                this@MissingNumberPlay.bannerAdModel = bannerAdModel
+                if (!hasWindowFocus()) this@MissingNumberPlay.bannerAdModel?.onPause()
+            }
+        })
+
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) bannerAdModel?.onResume() else bannerAdModel?.onPause()
     }
 
     private fun setBindingData() {
@@ -151,15 +176,26 @@ class MissingNumberPlay : BaseActivity(), View.OnClickListener {
         GamePreference.addLong(PrefKey.WrongAns + dyKey, wrongAnswer.toLong())
 //        GamePreference.addLong(PrefKey.BestTime + dyKey, Math.min(preTime, wrongAnswer.toLong()))
 
-        Popup_Result(
+        AdsManager.show()?.InterstitialAd(
             activity = this@MissingNumberPlay,
-            rightAnswer = rightAnswer,
-            wrongAnswer = wrongAnswer,
-            avgTime = 0,
-            retryCallback = {
-                doOnRetry()
+            adsListener = object : AdsListener() {
+                override fun onAdClose() {
+                    super.onAdClose()
+
+                    Popup_Result(
+                        activity = this@MissingNumberPlay,
+                        rightAnswer = rightAnswer,
+                        wrongAnswer = wrongAnswer,
+                        avgTime = 0,
+                        retryCallback = {
+                            doOnRetry()
+                        }
+                    )
+
+                }
             }
         )
+
     }
 
     private fun doOnRetry() {
@@ -521,6 +557,8 @@ class MissingNumberPlay : BaseActivity(), View.OnClickListener {
         binding.lottieView.setAnimation(if (isRightAns) R.raw.right_tick else R.raw.wrong_tick)
         binding.lottieView.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {
+                GameSound.play()
+                    ?.sound(if (isRightAns) R.raw.right_ans else R.raw.wrong_ans, volume = .6f)
             }
 
             override fun onAnimationEnd(animation: Animator) {
@@ -588,7 +626,19 @@ class MissingNumberPlay : BaseActivity(), View.OnClickListener {
                     .setButtonRight("NO")
                     .setButtonLeft("YES") {
                         resetQuestion()
-                        finish()
+
+                        AdsManager.show()?.InterstitialAd(
+                            activity = this@MissingNumberPlay,
+                            adsListener = object : AdsListener() {
+                                override fun onAdClose() {
+                                    super.onAdClose()
+
+                                    finish()
+
+                                }
+                            }
+                        )
+
                     }
             }
 

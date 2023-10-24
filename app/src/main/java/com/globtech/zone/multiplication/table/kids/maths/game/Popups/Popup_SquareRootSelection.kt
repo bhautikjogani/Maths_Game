@@ -1,5 +1,7 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Popups
 
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
 import GameModule.Base.BaseDialog
 import GameModule.GameSound
 import android.app.Activity
@@ -68,18 +70,27 @@ class Popup_SquareRootSelection(
         when (view) {
             binding.btnClose -> dismiss()
             binding.btnStart -> {
-                dismiss()
-                startActivity(
-                    Intent(activity, SquareRootPlay::class.java)
-                        .putExtra("variationType", variationType)
-                        .putExtra("isTimePlay", isTimePlay)
-                        .putExtra("time", binding.time)
-                        .putExtra(
-                            "difficulty", booleanArrayOf(
-                                binding.difficulty!![0].get(),
-                                binding.difficulty!![1].get(),
+                AdsManager.show()?.InterstitialAdIntervaled(
+                    activity = activity,
+                    parent = binding.frmParent,
+                    adsListener = object : AdsListener() {
+                        override fun onAdClose() {
+                            super.onAdClose()
+                            dismiss()
+                            startActivity(
+                                Intent(activity, SquareRootPlay::class.java)
+                                    .putExtra("variationType", variationType)
+                                    .putExtra("isTimePlay", isTimePlay)
+                                    .putExtra("time", binding.time)
+                                    .putExtra(
+                                        "difficulty", booleanArrayOf(
+                                            binding.difficulty!![0].get(),
+                                            binding.difficulty!![1].get(),
+                                        )
+                                    )
                             )
-                        )
+                        }
+                    }
                 )
             }
         }

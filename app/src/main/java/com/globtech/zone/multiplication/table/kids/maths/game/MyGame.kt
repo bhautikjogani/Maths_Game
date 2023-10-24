@@ -11,6 +11,8 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
+import com.onesignal.OneSignal
+import com.onesignal.debug.LogLevel
 
 class MyGame : MultiDexApplication(), LifecycleObserver {
 
@@ -27,6 +29,17 @@ class MyGame : MultiDexApplication(), LifecycleObserver {
         AppOpenManager(this)
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
 
+        setupOneSignal()
+
+    }
+
+    private fun setupOneSignal() {
+        if (GamePreference.getOneSignalId().isEmpty()) return
+        // Verbose Logging set to help debug issues, remove before releasing your app.
+        OneSignal.Debug.logLevel = LogLevel.VERBOSE
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this, GamePreference.getOneSignalId())
     }
 
     override fun attachBaseContext(base: Context?) {

@@ -1,5 +1,7 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Popups
 
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
 import GameModule.Base.BaseDialog
 import GameModule.GameSound
 import android.app.Activity
@@ -24,6 +26,7 @@ class Popup_TimeDigitSelection(
 
     init {
 
+        binding.frmTime.visibility = if (isTimePlay) View.VISIBLE else View.GONE
         binding.frmTime.visibility = if (isTimePlay) View.VISIBLE else View.GONE
         binding.frmDigit.visibility = View.VISIBLE
         binding.frmEMH.visibility = View.GONE
@@ -97,14 +100,23 @@ class Popup_TimeDigitSelection(
         when (view) {
             binding.btnClose -> dismiss()
             binding.btnStart -> {
-                dismiss()
-                startActivity(
-                    Intent(activity, passActivity)
-                        .putExtra("gameType", gameType)
-                        .putExtra("isTimePlay", isTimePlay)
-                        .putExtra("time", binding.time)
-                        .putExtra("variationType", variationType)
-                        .putExtra("digits", getDigit())
+                AdsManager.show()?.InterstitialAdIntervaled(
+                    activity = activity,
+                    parent = binding.frmParent,
+                    adsListener = object : AdsListener() {
+                        override fun onAdClose() {
+                            super.onAdClose()
+                            dismiss()
+                            startActivity(
+                                Intent(activity, passActivity)
+                                    .putExtra("gameType", gameType)
+                                    .putExtra("isTimePlay", isTimePlay)
+                                    .putExtra("time", binding.time)
+                                    .putExtra("variationType", variationType)
+                                    .putExtra("digits", getDigit())
+                            )
+                        }
+                    }
                 )
             }
         }

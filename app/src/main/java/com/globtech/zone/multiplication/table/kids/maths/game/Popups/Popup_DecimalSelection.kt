@@ -1,5 +1,7 @@
 package com.globtech.zone.multiplication.table.kids.maths.game.Popups
 
+import GameModule.AdsUtiles.AdsListener
+import GameModule.AdsUtiles.AdsManager
 import GameModule.Base.BaseDialog
 import GameModule.GameSound
 import android.app.Activity
@@ -93,26 +95,35 @@ class Popup_DecimalSelection(
         when (view) {
             binding.btnClose -> dismiss()
             binding.btnStart -> {
-                dismiss()
-                startActivity(
-                    Intent(activity, DecimalPlay::class.java)
-                        .putExtra("isTimePlay", isTimePlay)
-                        .putExtra("time", binding.time)
-                        .putExtra(
-                            "variationType", when (binding.type) {
-                                0 -> VariationType.DecimalAddition
-                                1 -> VariationType.DecimalSubtraction
-                                else -> VariationType.DecimalMultiplication
-                            }
-                        )
-                        .putExtra(
-                            "difficulty", booleanArrayOf(
-                                binding.difficulty!![0].get(),
-                                binding.difficulty!![1].get(),
-                                binding.difficulty!![2].get(),
-                            )
-                        )
-                )
+               AdsManager.show()?.InterstitialAdIntervaled(
+                   activity = activity,
+                   parent = binding.frmParent,
+                   object : AdsListener() {
+                       override fun onAdClose() {
+                           super.onAdClose()
+                           dismiss()
+                           startActivity(
+                               Intent(activity, DecimalPlay::class.java)
+                                   .putExtra("isTimePlay", isTimePlay)
+                                   .putExtra("time", binding.time)
+                                   .putExtra(
+                                       "variationType", when (binding.type) {
+                                           0 -> VariationType.DecimalAddition
+                                           1 -> VariationType.DecimalSubtraction
+                                           else -> VariationType.DecimalMultiplication
+                                       }
+                                   )
+                                   .putExtra(
+                                       "difficulty", booleanArrayOf(
+                                           binding.difficulty!![0].get(),
+                                           binding.difficulty!![1].get(),
+                                           binding.difficulty!![2].get(),
+                                       )
+                                   )
+                           )
+                       }
+                   }
+               )
             }
         }
 

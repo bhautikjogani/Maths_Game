@@ -79,8 +79,8 @@ class GameSound {
 
     fun setVolume() {
         mediaPlayer?.setVolume(
-            if (isPlayingOpen) .1f else .3f,
-            if (isPlayingOpen) .1f else .3f
+            if (isPlayingOpen) .05f else .2f,
+            if (isPlayingOpen) .05f else .2f
         )
     }
 
@@ -165,7 +165,7 @@ class GameSound {
         }
     }
 
-    fun stopMusic() {
+    private fun stopMusic() {
         try {
             if (mediaPlayer?.isPlaying == true) {
                 mediaPlayer?.pause()
@@ -191,8 +191,12 @@ class GameSound {
     }
 
     fun destroy() {
-        stopMusic()
-        instance = null
+        try {
+            stopMusic()
+            instance = null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 }

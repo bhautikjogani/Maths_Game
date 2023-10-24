@@ -178,22 +178,22 @@ class AdsManager {
         )
     }
 
-    fun BannerAd(activity: Activity, parent: ViewGroup, bannerAdListener: BannerAdListener) {
+    fun BannerAd(activity: Activity, parent: ViewGroup, bannerAdListener: BannerAdListener? = null) {
         if (GamePreference.getBoolean(PrefKey.isRemoveAds) || Utils.isNetworkAvailable(activity)
                 .not()
         ) {
-            bannerAdListener.onBannerAdError()
+            bannerAdListener?.onBannerAdError()
             return
         }
         googleAds.showBannerAd(activity, parent, object : BannerAdListener() {
             override fun onBannerAdLoaded(bannerAdModel: BannerAdModel) {
                 super.onBannerAdLoaded(bannerAdModel)
-                bannerAdListener.onBannerAdLoaded(bannerAdModel)
+                bannerAdListener?.onBannerAdLoaded(bannerAdModel)
             }
 
             override fun onBannerAdError() {
                 super.onBannerAdError()
-                bannerAdListener.onBannerAdError()
+                bannerAdListener?.onBannerAdError()
             }
         })
     }
@@ -257,8 +257,12 @@ class AdsManager {
     }
 
     fun destroy() {
-        googleAds.destroy()
-        instance = null
+        try {
+            googleAds.destroy()
+            instance = null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 
